@@ -10,4 +10,4 @@ def hello_world():
     return 'Hello, World!'
 
 
-app.run(host='0.0.0.0', port=os.environ.get('HSE_HTTP_FLASK_PORT', 80))
+app.run(host='0.0.0.0', port=int(os.environ.get('HSE_HTTP_FLASK_PORT', 80)))
