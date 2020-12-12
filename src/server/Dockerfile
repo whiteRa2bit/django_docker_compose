@@ -8,6 +8,8 @@ RUN pip install -r requirements.txt
 
 COPY . .
 EXPOSE 8000
+RUN rm */migrations/0*.py
+RUN rm db.sqlite3
 RUN python manage.py makemigrations server
 RUN python manage.py migrate
 CMD ["python", "manage.py", "runserver", "0.0.0.0:80"]
