@@ -11,4 +11,3 @@ EXPOSE 8000
 RUN ["chmod", "+x", "clean_db.sh"]
 RUN ./clean_db.sh
 CMD ["python", "manage.py", "runserver", "0.0.0.0:80"]
-# CMD ["/bin/bash"]
