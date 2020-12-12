@@ -34,14 +34,14 @@ def test_add_item():
     response = requests.post(ADD_ITEM_URL, data=json.dumps(BASE_ITEM))
     body = json.loads(response.content)
     assert response.status_code == 200
-    assert body["data"] == {**{"id": 1}, **BASE_ITEM}
+    assert body["data"] == {**{"id": ITEM_ID}, **BASE_ITEM}
 
 
 def test_get_item():
     response = requests.get(GET_ITEM_URL)
     body = json.loads(response.content)
     assert response.status_code == 200
-    assert body["data"] == {**{"id": 1}, **BASE_ITEM}
+    assert body["data"] == {**{"id": ITEM_ID}, **BASE_ITEM}
 
 
 def test_update_item(new_name="hse_ds"):
@@ -49,7 +49,7 @@ def test_update_item(new_name="hse_ds"):
     response = requests.patch(UPDATE_ITEM_URL, data=json.dumps(update_params))
     body = json.loads(response.content)
     assert response.status_code == 200
-    real = {**{"id": 1}, **BASE_ITEM}
+    real = {**{"id": ITEM_ID}, **BASE_ITEM}
     real["name"] = new_name
     assert body["data"] == real
 
