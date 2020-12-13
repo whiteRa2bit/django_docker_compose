@@ -13,4 +13,5 @@ class Item(models.Model):
         return self.name
 
     def to_dict(self):
-        return {field: getattr(self, field) for field in ITEM_FIELDS}
+        fields = ['id'] + ITEM_FIELDS
+        return {field: getattr(self, field) for field in fields}
