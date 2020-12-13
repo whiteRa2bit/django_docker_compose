@@ -43,8 +43,7 @@ def get_item(request, id):
 @csrf_exempt
 @require_http_methods(['POST'])
 def add_item(request):
-    params = json.loads(request.body.decode())
-    is_valid = _validate_fields(params)
+    params = json.loads(request.body.decode())    is_valid = _validate_fields(params)
     if is_valid:
         item_fields = {field: params.get(field) for field in ITEM_FIELDS}
         item = Item(**item_fields)
@@ -81,4 +80,3 @@ def update_item(request, id):
     except Item.DoesNotExist:
         response = _error("No item with such id: {}".format(id), 404)
     return response
-
