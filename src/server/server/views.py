@@ -82,4 +82,3 @@ def update_item(request, id):
     except Item.DoesNotExist:
         response = _error("No item with such id: {}".format(id), 404)
     return response
-
