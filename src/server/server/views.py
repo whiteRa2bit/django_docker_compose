@@ -75,13 +75,11 @@ def update_item(request, id):
         item = Item.objects.get(pk=id)
         params = json.loads(request.body.decode())
         is_valid = _validate_fields(params, require_all=False)
-        if is_valid:
-            for field in params:
-                setattr(item, field, params[field])
-            item.save(update_fields=params.keys())
-            response = _success(item.to_dict())
-        else:
-            response = response = _error("Invalid item format, provide an item with the following fields: {}".format(ITEM_FIELDS))
+        for field in params:
+            setattr(item, field, params[field])
+        item.save(update_fields=params.keys())
+        response = _success(item.to_dict())
     except Item.DoesNotExist:
         response = _error("No item with such id: {}".format(id), 404)
     return response
+

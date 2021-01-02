@@ -1,13 +1,12 @@
-# Документация на мой API
+# API Documentation
 
-Ниже приведена документация для API для хранения учебных материалов.
-У каждого учебного материала присутствуют следующие поля:
-- name (Название)
-- topic (К какой теме относиться учебный материал)
-- rate (Насколько полезным считается данный материал)
-- link (Ссылка на источник)
+Each item has the following fields
+- name
+- topic
+- rate
+- link
 
-Пример:
+Example:
 
     "name": "ds_hse"
     "topic": "distributed systems"
@@ -15,23 +14,22 @@
     "link": "https://github.com/osukhoroslov/hse-ds-2020"
 
 
-Все endpoints возвращают json в cледующем формате:
-
+All endpoints return json in the following format:
     {
         "ok": True/False
         "errors": {},
         "data": {}
     }
 
-- "ok" - True, если не возникло ошибок при обработке запроса, False иначе
-- "errors" - возвращает строку с ошибкой, которая возникла при обработке запроса, если ошибок нет - {}
-- "data" - результат выполнения запроса
+- "ok" - True, if no exceptions while processing a request, False otherwise
+- "errors" - returns a string with error, if no exceptions occured returns - {}
+- "data" - request processing result
 
-Ниже представлены запросы, которые поддерживаются, и примеры для них.
+Below you can find a list of supported requests and their description
 
 ## Get list of items
 
-Возвращает список всех учебных материалов, которые были добавлены
+Returns the full list of materials, that were added
 
 ### Request
 
@@ -58,7 +56,7 @@
 
 ## Get item
 
-Возвращает описание одного учебного материала по предоставленному id
+Return an item description provided item id
 
 ### Request
 
@@ -80,8 +78,7 @@
         }
     }
 
-В случае если материала с таким id не существует возвращает следующее:
-
+If there is not a material with provided id returns:
     404
     {
         "ok": false,
@@ -92,7 +89,7 @@
 
 ## Add item
 
-Добавляет новый учебный материал. Валидирует, что запрос содержит все поля из [name, topic, rate, link] и никаких кроме них.
+Adds a new item. Checks that a request contains only the fields from a list [name, topic, rate, link].
 
 ### Request
 
@@ -120,8 +117,7 @@
         }
     }
 
-В случае некорректного запроса возвращает:
-
+In case of invalid item format returns
     400
     {
         "ok": false,
@@ -130,7 +126,7 @@
 
 ## Delete item
 
-Удаляет учебный материал по предоставленному id
+Deletes item provided item id
 
 ### Request
 
@@ -145,7 +141,7 @@
         "ok": true
     }
 
-В случае если материала с таким id не существует возвращает следующее:
+If there is not a material with provided id returns:
 
     404
     {
@@ -156,7 +152,7 @@
 
 ## Update item
 
-Обновляет информацию об учебном материале по предоставленному id. В теле запроса предоставляются несколько полей (не обязательно все) и соотвествующие для них значения.
+Updates item information provided item id. In the request body the desired fields are provided (not necessarily all) and their corresponding values
 
 ### Request
 
@@ -181,7 +177,7 @@
         }
     }
 
-В случае если материала с таким id не существует возвращает следующее:
+If there is not a material with provided id returns:
 
     404
     {
@@ -189,7 +185,7 @@
         "errors": "No item with such id: <ID_HERE>"
     }
 
-В случае если в теле запроса будут указаны невалидные поля:
+If there are invalid fields:
 
     400
     {
